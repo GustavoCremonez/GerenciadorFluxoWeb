@@ -4,8 +4,8 @@ import { PaginaNaoEncontradaComponent } from './modules/compartilhado/components
 import { AppComponent } from './app.component';
 
 const routes: Routes = [
-  {path: 'home', component: AppComponent},
-  {path: '', redirectTo: 'home', pathMatch: 'full'},
+  {path: 'fluxos', loadChildren: () => import('./modules/fluxo/fluxo.module').then(m => m.FluxoModule)},
+  {path: '', redirectTo: 'fluxos', pathMatch: 'full'},
   {path: 'pagina-nao-encontrada', component: PaginaNaoEncontradaComponent},
   {path: '**', redirectTo: 'pagina-nao-encontrada', pathMatch: 'full'}
 ];

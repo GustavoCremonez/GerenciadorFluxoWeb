@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CompartilhadoModule } from './modules/compartilhado/compartilhado.module';
 import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
+
 
 import { AppComponent } from './app.component';
 
@@ -12,7 +14,8 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    CompartilhadoModule
+    CompartilhadoModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,20 @@
+<div class="container text-center p-3">
+  <h1 class="mb-3">Fluxos</h1>
+  <a href="/fluxos/cadastro-fluxo" class="btn btn-outline-primary">Novo fluxo</a>
+  <div class="row mt-5">
+    <div *ngFor="let item of fluxos" class="col">
+      <div class="card p-3 shadow" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{item.nome}}</h5>
+          <p class="card-text">{{item.descricao}}</p>
+
+          <div class="d-grid gap-2">
+            <a href="#" class="btn btn-outline-primary">Visualizar fluxo</a>
+            <a href="#" class="btn btn-outline-warning">Editar fluxo</a>
+            <a (click)="removerFluxo(item.id)" class="btn btn-outline-danger">Remover fluxo</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
