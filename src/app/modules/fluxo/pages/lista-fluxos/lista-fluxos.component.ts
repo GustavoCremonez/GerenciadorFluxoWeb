@@ -1,7 +1,10 @@
-import { FluxoModel } from 'src/app/models/fluxo.interface';
-import { FluxoService } from './../../services/fluxo.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
+
+import { FluxoModel } from './../../../../models/fluxo.interface';
+import { FluxoService } from './../../services/fluxo.service';
+import { GlobalService } from 'src/app/modules/compartilhado/services/global.service';
 
 @Component({
   selector: 'app-lista-fluxos',
@@ -12,14 +15,18 @@ export class ListaFluxosComponent implements OnInit, OnDestroy {
   private readonly destroy$: Subject<void> = new Subject();
   fluxos!: FluxoModel[];
 
-  constructor(private fluxoService: FluxoService ){}
+  constructor(
+    private fluxoService: FluxoService,
+    private router: Router,
+    private globalService: GlobalService
+    ){}
 
   ngOnInit(): void {
     this.buscarFluxos();
   }
 
   buscarFluxos(): void{
-    this.fluxoService.buscarFluxos()
+    this.fluxoService.get()
     // .pipe(takeUntil(this.destroy$))
     .subscribe({
       next: (response) => {
@@ -32,7 +39,7 @@ export class ListaFluxosComponent implements OnInit, OnDestroy {
   }
 
   removerFluxo(id: number): void{
-    this.fluxoService.removerFluxo(id)
+    this.fluxoService.delete(id)
     .pipe(takeUntil(this.destroy$))
     .subscribe({
       next: () => {
@@ -42,6 +49,10 @@ export class ListaFluxosComponent implements OnInit, OnDestroy {
         console.error(error);
       }
     })
+  }
+
+  navegarParaEdicao(id: number): void{
+    this.router.navigate([`fluxos/editar-fluxo/${id}`]);
   }
 
   ngOnDestroy(): void {

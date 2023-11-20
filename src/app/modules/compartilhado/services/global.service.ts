@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
+import { FluxoModel } from 'src/app/models/fluxo.interface';
 
 @Injectable({
   providedIn: 'root'

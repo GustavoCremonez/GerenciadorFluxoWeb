@@ -2,7 +2,7 @@
   <h1 class="mb-3 text-center">Fluxos</h1>
   <div class="row">
     <div class="col">
-      <form [formGroup]="formularioCadastroFluxo" (submit)="cadastrarFluxo()">
+      <form [formGroup]="formularioCadastroFluxo" (submit)="SalvarInformacoes()">
         <input type="hidden" class="form-control" id="id" formControlName="id">
 
         <div class="mb-3">
@@ -15,7 +15,7 @@
         </div>
 
         <div class="d-inline-flex gap-1">
-          <button type="submit" class="btn btn-primary">Cadastrar</button>
+          <button type="submit" class="btn btn-primary">{{!ehEdicao ? "Cadastrar" : "Editar"}}</button>
           <button type="reset" class="btn btn-warning">Limpar formulário</button>
           <a href="/fluxos/lista-fluxos" class="btn btn-danger">Voltar</a>
         </div>

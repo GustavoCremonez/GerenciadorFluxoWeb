@@ -4,14 +4,16 @@ import { FluxoRoutingModule } from './fluxo.route';
 import { HttpClientModule } from '@angular/common/http';
 
 import { ListaFluxosComponent } from './pages/lista-fluxos/lista-fluxos.component';
-import { CadastroFluxoComponent } from './pages/cadastro-fluxo/cadastro-fluxo.component';
+import { FormularioFluxoComponent } from './pages/cadastro-fluxo/formulario-fluxo.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ListaProcessosComponent } from './lista-processos/lista-processos.component';
 
 
 @NgModule({
   declarations: [
     ListaFluxosComponent,
-    CadastroFluxoComponent
+    FormularioFluxoComponent,
+    ListaProcessosComponent
   ],
   imports: [
     CommonModule,
