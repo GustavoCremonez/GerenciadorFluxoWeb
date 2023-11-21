@@ -1,0 +1,30 @@
+<div class="container p-3">
+  <h1 class="mb-3 text-center">Processos</h1>
+  <div class="row">
+    <div class="col">
+      <form [formGroup]="formularioProcesso" (submit)="SalvarInformacoes()">
+
+        <input type="hidden" class="form-control" id="id" formControlName="id">
+        <input type="hidden" class="form-control" id="idFluxo" formControlName="idFluxo">
+        <input type="hidden" class="form-control" id="idProcessoSuperior" formControlName="idProcessoSuperior">
+
+        <div class="mb-3">
+          <label for="nome" class="form-label">Nome do processo</label>
+          <input type="text" class="form-control" id="nome" formControlName="nome">
+        </div>
+
+        <div class="mb-3">
+          <label for="tipoProcesso" class="form-label">Tipo do processo</label>
+          <select class="form-select" name="tipoProcesso" id="tipoProcesso" formControlName="tipoProcesso">
+            <option *ngFor="let chave of chavesEnum;" value='{{chave}}'>{{tipoProcesso[chave]}}</option>
+          </select>
+        </div>
+
+        <div class="d-inline-flex gap-1">
+          <button type="submit" class="btn btn-primary">{{!ehEdicao ? "Cadastrar" : "Editar"}}</button>
+          <a routerLink='/processos/lista-processos/{{idFluxo}}' class="btn btn-danger">Voltar</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -4,8 +4,15 @@ import { PaginaNaoEncontradaComponent } from './modules/compartilhado/components
 import { AppComponent } from './app.component';
 
 const routes: Routes = [
-  {path: 'fluxos', loadChildren: () => import('./modules/fluxo/fluxo.module').then(m => m.FluxoModule)},
+  {
+    path: 'fluxos',
+    loadChildren: () => import('./modules/fluxo/fluxo.module').then(m => m.FluxoModule)
+  },
   {path: '', redirectTo: 'fluxos', pathMatch: 'full'},
+  {
+    path: 'processos',
+    loadChildren: () => import('./modules/processo/processo.module').then(m => m.ProcessoModule)
+  },
   {path: 'pagina-nao-encontrada', component: PaginaNaoEncontradaComponent},
   {path: '**', redirectTo: 'pagina-nao-encontrada', pathMatch: 'full'}
 ];

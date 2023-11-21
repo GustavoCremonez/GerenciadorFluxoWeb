@@ -6,7 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ListaFluxosComponent } from './pages/lista-fluxos/lista-fluxos.component';
 import { FormularioFluxoComponent } from './pages/cadastro-fluxo/formulario-fluxo.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ListaProcessosComponent } from './lista-processos/lista-processos.component';
+import { ListaProcessosComponent } from '../processo/pages/lista-processos/lista-processos.component';
 
 
 @NgModule({

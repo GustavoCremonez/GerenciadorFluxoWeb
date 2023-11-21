@@ -1,5 +1,5 @@
 export enum TipoProcesso {
-  ProcessoSistemica = 1,
-  ProcessoManual = 2,
-  ProcessoAuxilioFerramentas = 3
+  'Processo sistemico' = 1,
+  'Processo manual' = 2,
+  'Processo auxilio ferramentas' = 3
 }

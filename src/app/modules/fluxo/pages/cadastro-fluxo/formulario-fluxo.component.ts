@@ -4,7 +4,6 @@ import { Subject, takeUntil } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { FluxoService } from '../../services/fluxo.service';
-import { FluxoModel } from 'src/app/models/fluxo.interface';
 
 @Component({
   selector: 'app-formulario-fluxo',
@@ -31,15 +30,19 @@ export class FormularioFluxoComponent implements OnInit, OnDestroy {
 
     this.route.params
     .subscribe(params => {
-      this.dadosAEditar(params['id']),
-      this.ehEdicao = true
+      const id = params['id']
+
+      if(id){
+        this.dadosAEditar(id),
+        this.ehEdicao = true
+      }
     });
   }
 
   SalvarInformacoes(): void{
     if (!this.ehEdicao) {
       this.fluxoService
-      .create(this.formularioCadastroFluxo.value)
+      .post(this.formularioCadastroFluxo.value)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: () => {
@@ -74,7 +77,6 @@ export class FormularioFluxoComponent implements OnInit, OnDestroy {
     .pipe(takeUntil(this.destroy$))
     .subscribe({
       next: (response) => {
-        console.log(response)
         this.formularioCadastroFluxo.setValue(response);
       },
       error: (error) => {
