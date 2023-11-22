@@ -23,10 +23,9 @@
                     <h5 class="card-title">{{data.nome}}</h5>
                   <p class="card-text">{{tipoProcesso[data.tipoProcesso]}}</p>
                     <div class="d-grid gap-2">
-                      <a class="btn btn-outline-primary">Visualizar</a>
                       <a routerLink="/processos/cadastro-processo/{{idFluxo}}/{{data.id}}" class="btn btn-outline-success">Adicionar sub processo</a>
                       <a routerLink="/processos/editar-processo/{{idFluxo}}/{{data.id}}" routerLinkActive="router-link-active"  class="btn btn-outline-warning">Editar</a>
-                      <a (click)="deletarProcesso(data.id)" class="btn btn-outline-danger">Remover</a>
+                      <a (click)="deletarProcesso(data)" class="btn btn-outline-danger">Remover</a>
                     </div>
                   </div>
                 </div>

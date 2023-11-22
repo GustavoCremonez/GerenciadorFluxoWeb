@@ -4,7 +4,7 @@ import { Subject, takeUntil } from 'rxjs';
 
 import { FluxoModel } from './../../../../models/fluxo.interface';
 import { FluxoService } from './../../services/fluxo.service';
-import { GlobalService } from 'src/app/modules/compartilhado/services/global.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-lista-fluxos',
@@ -18,7 +18,7 @@ export class ListaFluxosComponent implements OnInit, OnDestroy {
   constructor(
     private fluxoService: FluxoService,
     private router: Router,
-    private globalService: GlobalService
+    private toastr: ToastrService
     ){}
 
   ngOnInit(): void {
@@ -27,7 +27,7 @@ export class ListaFluxosComponent implements OnInit, OnDestroy {
 
   buscarFluxos(): void{
     this.fluxoService.get()
-    // .pipe(takeUntil(this.destroy$))
+    .pipe(takeUntil(this.destroy$))
     .subscribe({
       next: (response) => {
         (this.fluxos = response);
@@ -44,9 +44,11 @@ export class ListaFluxosComponent implements OnInit, OnDestroy {
     .subscribe({
       next: () => {
         this.buscarFluxos();
+        this.toastr.success('Fluxo removido com sucesso', 'Sucesso!');
       },
       error: (error) => {
         console.error(error);
+        this.toastr.error('Aconteceu um erro, tente novamente mais tarde!', 'Erro!');
       }
     })
   }

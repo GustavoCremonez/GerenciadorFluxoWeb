@@ -8,6 +8,5 @@ export interface ProcessoModel {
   nomeFluxo: string,
   nome: string,
   tipoProcesso: TipoProcesso,
-  subProcessos?: ProcessoModel[],
-  anotacoes?: AnotacaoModel[]
+  subProcessos: ProcessoModel[],
 }

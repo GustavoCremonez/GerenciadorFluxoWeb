@@ -4,6 +4,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { FluxoService } from '../../services/fluxo.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-formulario-fluxo',
@@ -18,7 +19,8 @@ export class FormularioFluxoComponent implements OnInit, OnDestroy {
   constructor(
     private fluxoService: FluxoService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private toastr: ToastrService
   ){}
 
   ngOnInit(): void {
@@ -47,9 +49,11 @@ export class FormularioFluxoComponent implements OnInit, OnDestroy {
       .subscribe({
         next: () => {
           this.irParaLista();
+          this.toastr.success('Fluxo cadastrado com sucesso!', 'sucesso!');
         },
         error: (error) => {
           console.error(error);
+          this.toastr.error('Aconteceu um erro, tente novamente mais tarde!', 'Erro!');
         }
       })
     } else {
@@ -59,9 +63,11 @@ export class FormularioFluxoComponent implements OnInit, OnDestroy {
       .subscribe({
         next: () => {
           this.irParaLista();
+          this.toastr.success('Fluxo editado com sucesso!', 'sucesso!');
         },
         error: (error) => {
           console.error(error);
+          this.toastr.error('Aconteceu um erro, tente novamente mais tarde!', 'Erro!');
         }
       })
     }

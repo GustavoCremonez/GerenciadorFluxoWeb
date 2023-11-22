@@ -5,6 +5,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { ProcessoModel } from 'src/app/models/processo.interface';
 import { ProcessoService } from './../../services/processo.service';
 import { TipoProcesso } from 'src/app/models/tipo-processo.interface';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-lista-processos',
@@ -20,7 +21,8 @@ export class ListaProcessosComponent implements OnInit, OnDestroy{
 
   constructor(
     private route: ActivatedRoute,
-    private processoService: ProcessoService
+    private processoService: ProcessoService,
+    private toastr: ToastrService
     ){}
 
   ngOnInit(): void {
@@ -48,14 +50,27 @@ export class ListaProcessosComponent implements OnInit, OnDestroy{
     });
   }
 
-  deletarProcesso(id: number): void{
-    this.processoService
-    .delete(id)
-    .pipe(takeUntil(this.destroy$))
-    .subscribe({
-      next: () => this.buscarProcessos(this.idFluxo),
-      error: (error) => console.log(error)
-    });
+  deletarProcesso(processo: ProcessoModel): void{
+    console.log(processo.subProcessos.length === 0)
+    if(processo.subProcessos.length === 0){
+      this.processoService
+      .delete(processo.id)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: () =>{
+          this.buscarProcessos(this.idFluxo);
+          this.toastr.success('Processo foi removido!', 'Sucesso!');
+        },
+        error: (error) => {
+          console.log(error);
+          this.toastr.error('Aconteceu um erro, tente novamente mais tarde!', 'Erro!');
+        }
+      });
+    }
+    else{
+      this.toastr.warning('Para remover um processo precisa remover todos os sub processos do mesmo!', 'Aviso!');
+      this.buscarProcessos(this.idFluxo);
+    }
   }
 
   ngOnDestroy(): void {

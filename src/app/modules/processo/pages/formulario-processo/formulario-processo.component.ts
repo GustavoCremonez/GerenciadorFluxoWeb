@@ -4,6 +4,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-formulario-processo',
@@ -23,6 +24,7 @@ export class FormularioProcessoComponent  implements OnInit, OnDestroy {
     private processoService: ProcessoService,
     private route: ActivatedRoute,
     private router: Router,
+    private toastr: ToastrService
     ) {}
 
   ngOnInit(): void {
@@ -57,9 +59,11 @@ export class FormularioProcessoComponent  implements OnInit, OnDestroy {
       .subscribe({
         next: () => {
           this.irParaLista();
+          this.toastr.success('Processo cadastrado!', 'Sucesso!');
         },
         error: (error) => {
           console.error(error);
+          this.toastr.error('Aconteceu um erro, tente novamente mais tarde!', 'Erro!');
         }
       })
     }else{
@@ -69,9 +73,11 @@ export class FormularioProcessoComponent  implements OnInit, OnDestroy {
       .subscribe({
         next: () => {
           this.irParaLista();
+          this.toastr.success('Processo editado!', 'Sucesso!');
         },
         error: (error) => {
           console.error(error);
+          this.toastr.error('Aconteceu um erro, tente novamente mais tarde!', 'Erro!');
         }
       })
     }
